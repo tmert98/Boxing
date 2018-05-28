@@ -16,6 +16,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Lesson
 {
+
+    // ...
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Training", inversedBy="lesson")
+     * @ORM\JoinColumn(name="lesson_id", referencedColumnName="id")
+     */
+    private $training;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -57,6 +66,22 @@ class Lesson
     public function getTime()
     {
         return $this->time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTraining()
+    {
+        return $this->training;
+    }
+
+    /**
+     * @param mixed $training
+     */
+    public function setTraining($training)
+    {
+        $this->training = $training;
     }
 
     /**

@@ -16,6 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Training
 {
+
+    // ...
+
+    /**
+     * @ORM\OneToMany(targetEntity="Lesson", mappedBy="training")
+     */
+    private $lesson;
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
