@@ -23,6 +23,7 @@ class Training
      * @ORM\OneToMany(targetEntity="Lesson", mappedBy="training")
      */
     private $lesson;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
