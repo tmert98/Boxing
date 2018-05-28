@@ -22,7 +22,7 @@ class Training
     /**
      * @ORM\OneToMany(targetEntity="Lesson", mappedBy="training")
      */
-    private $lesson;
+    private $lessons;
 
     /**
      * @ORM\Column(type="integer")
