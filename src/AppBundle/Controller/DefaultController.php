@@ -51,7 +51,17 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin", name="admin")
+     * @Route ("/inloggen", name="inloggen")
+     */
+    public function inloggenAction()
+    {
+        return $this->render('bezoeker/inloggen.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route("/admin")
      */
     public function adminAction()
     {
@@ -59,7 +69,17 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/user", name="user")
+     * @Route ("/registreren", name="registreren")
+     */
+    public function registrerenAction()
+    {
+        return $this->render('bezoeker/registreren.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route ("/user", name="user")
      */
     public function userAction()
     {
