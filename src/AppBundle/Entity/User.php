@@ -9,13 +9,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class Member
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -23,6 +24,70 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNaam()
+    {
+        return $this->naam;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAchternaam()
+    {
+        return $this->achternaam;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTussenvoegsel()
+    {
+        return $this->tussenvoegsel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateofbirth()
+    {
+        return $this->dateofbirth;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
 
     /**
      * @return mixed
@@ -41,12 +106,25 @@ class User
     }
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=254, unique=true)
+     */
+    private $email;
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=64 )
      */
     private $password;
 
@@ -130,4 +208,33 @@ class User
     {
         $this->roles = $roles;
     }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
 }

@@ -51,10 +51,18 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="admin")
      */
     public function adminAction()
     {
         return new Response('<html><body>admin pagina!</body></html>');
+    }
+
+    /**
+     * @Route("/user", name="user")
+     */
+    public function userAction()
+    {
+        return new Response('<html><body>user pagina!</body></html>');
     }
 }
