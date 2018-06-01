@@ -51,10 +51,38 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route ("/inloggen", name="inloggen")
+     */
+    public function inloggenAction()
+    {
+        return $this->render('bezoeker/inloggen.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
      * @Route("/admin")
      */
     public function adminAction()
     {
         return new Response('<html><body>admin pagina!</body></html>');
+    }
+
+    /**
+     * @Route ("/registreren", name="registreren")
+     */
+    public function registrerenAction()
+    {
+        return $this->render('bezoeker/registreren.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route ("/user", name="user")
+     */
+    public function userAction()
+    {
+        return new Response('<html><body>user pagina!</body></html>');
     }
 }
