@@ -61,10 +61,23 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="admin")
      */
-    public function adminAction()
+    public function instructorAction()
     {
-        return new Response('<html><body>admin pagina!</body></html>');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        return new Response('<html><body>instructor pagina!</body></html>');
     }
+
+    /**
+     * @Route ("/registreren", name="registreren")
+     */
+    public function registrrenAction()
+    {
+        return $this->render('bezoeker/registreren.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+
 }
