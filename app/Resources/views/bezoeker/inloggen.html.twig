@@ -1,22 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-5 col-md-3 mx-auto pt-5">
-            <div class="form-login">
-                <h4>Please Log in.</h4>
-                <input name="username" type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
-                </br>
-                <input name="password" type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
-                </br>
-                <div class="wrapper">
-            <span class="group-btn">
-                <a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
-            </span>
-                </div>
-            </div>
 
-        </div>
-    </div>
-</div>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <table>
+            <tr>
+                <td>gebruikersnaam:</td>
+                <td>
+                    <input type="text" autocomplete="off" id="_username" name="_username" placeholder="vul uw gebruikersnaam in">
+                </td>
+            </tr>
+            <tr>
+                <td>wachtwoord:</td>
+                <td>
+                    <input type="password" autocomplete="off" id="password" name="_password" placeholder="vul uw wachtwoord in">
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="inloggen"><input type="reset" value="reset" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
 {% endblock %}
