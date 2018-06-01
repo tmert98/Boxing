@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Member
  * @ORM\Entity
- * @ORM\Table(name="persons")
+ * @ORM\Table(name="users")
  */
-class Person
+class User
 {
     /**
      * @ORM\Column(type="integer")
@@ -23,6 +23,22 @@ class Person
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @ORM\Column(type="string")
@@ -53,6 +69,11 @@ class Person
      * @ORM\Column(type="date")
      */
     private $dateofbirth;
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles;
 
     /**
      * @param mixed $username
@@ -102,5 +123,11 @@ class Person
         $this->dateofbirth = $dateofbirth;
     }
 
-
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
 }

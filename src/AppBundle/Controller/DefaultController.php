@@ -61,13 +61,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/instructors")
+     * @Route("/admin")
      */
-    public function instructorAction()
+    public function adminAction()
     {
-        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR', null, 'Unable to access this page!');
-        return new Response('<html><body>instructor pagina!</body></html>');
+        return new Response('<html><body>admin pagina!</body></html>');
     }
-
-
 }
