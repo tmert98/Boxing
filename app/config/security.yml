@@ -7,6 +7,7 @@ security:
         our_db_provider:
             entity:
                   class: AppBundle:User
+                  property: username
                   # if you're using multiple entity managers
                   # manager_name: customer
     encoders:
@@ -22,7 +23,7 @@ security:
 
         main:
             pattern:    ^/
-            http_basic: ~
+#            http_basic: ~
             provider: our_db_provider
 
             anonymous: ~

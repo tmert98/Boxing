@@ -30,6 +30,16 @@ class DefaultController extends Controller
         ]);
     }
 
+//    /**
+//     * @Route ("/inloggen", name="inloggen")
+//     */
+//    public function inloggenAction()
+//    {
+//        return $this->render('bezoeker/inloggen.html.twig', [
+//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+//        ]);
+//    }
+
     /**
      * @Route ("/contact", name="contact")
      */
@@ -50,15 +60,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @Route ("/inloggen", name="inloggen")
-     */
-    public function inloggenAction()
-    {
-        return $this->render('bezoeker/inloggen.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
-    }
 
     /**
      * @Route("/admin", name="adminDefault")
