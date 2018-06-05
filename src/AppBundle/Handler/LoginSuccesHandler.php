@@ -8,6 +8,7 @@
 
 namespace AppBundle\Handler;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -47,15 +48,14 @@ class LoginSuccesHandler implements AuthenticationSuccessHandlerInterface
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        // TODO: Implement onAuthenticationSuccess() method.
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN'))
         {
-            $response = new redirectResponse($this->router->generate('admin'));
+            $response = new RedirectResponse($this->router->generate('adminDefault'));
         }
-        elseif ($this->authorizationChecker->isGranted('ROLE_USER'));
-        {
-            $response = new RedirectResponse($this->router->generate('user'));
-        }
+        //elseif ($this->authorizationChecker->isGranted('ROLE_USER'));
+        //{
+        //    $response = new RedirectResponse($this->router->generate('user'));
+        //}
         return $response;
     }
 }

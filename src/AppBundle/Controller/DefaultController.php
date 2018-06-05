@@ -61,11 +61,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="adminDefault")
      */
     public function adminAction()
     {
-        return new Response('<html><body>admin pagina!</body></html>');
+        return $this->render('admin/personen.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
     }
 
     /**
@@ -84,5 +86,13 @@ class DefaultController extends Controller
     public function userAction()
     {
         return new Response('<html><body>user pagina!</body></html>');
+    }
+
+    /**
+     * @Route ("/personenAdmin", name="personenAdmin")
+     */
+    public function personenAdminAction()
+    {
+
     }
 }

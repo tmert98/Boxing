@@ -9,12 +9,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class Member
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
+ *
+ * @ORM\Entity
+ * @UniqueEntity(fields="email", message="Email al in gebruik")
+ * @UniqueEntity(fields="username", message="Gebruikersnaam al in gebruik")
  */
 class User implements UserInterface, \Serializable
 {
@@ -238,3 +243,4 @@ class User implements UserInterface, \Serializable
     }
 
 }
+//sdfsdf
