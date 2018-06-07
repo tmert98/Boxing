@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -30,86 +31,6 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
-    public function getSalt()
-    {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNaam()
-    {
-        return $this->naam;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAchternaam()
-    {
-        return $this->achternaam;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTussenvoegsel()
-    {
-        return $this->tussenvoegsel;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateofbirth()
-    {
-        return $this->dateofbirth;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
@@ -121,12 +42,10 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @return mixed
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
      */
-    public function getEmail()
-    {
-        return $this->email;
-    }
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -159,11 +78,24 @@ class User implements UserInterface, \Serializable
     private $roles;
 
     /**
-     * @param mixed $username
+     * @return mixed
      */
-    public function setUsername($username)
+    public function getPlainPassword()
     {
-        $this->username = $username;
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
@@ -174,12 +106,38 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
     }
 
-    /**
-     * @param mixed $naam
-     */
-    public function setNaam($naam)
+    public function getRoles()
     {
-        $this->naam = $naam;
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAchternaam()
+    {
+        return $this->achternaam;
     }
 
     /**
@@ -191,11 +149,11 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $tussenvoegsel
+     * @return mixed
      */
-    public function setTussenvoegsel($tussenvoegsel)
+    public function getDateofbirth()
     {
-        $this->tussenvoegsel = $tussenvoegsel;
+        return $this->dateofbirth;
     }
 
     /**
@@ -207,12 +165,61 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $roles
+     * @return mixed
      */
-    public function setRoles($roles)
+    public function getEmail()
     {
-        $this->roles = $roles;
+        return $this->email;
     }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNaam()
+    {
+        return $this->naam;
+    }
+
+    /**
+     * @param mixed $naam
+     */
+    public function setNaam($naam)
+    {
+        $this->naam = $naam;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTussenvoegsel()
+    {
+        return $this->tussenvoegsel;
+    }
+
+    /**
+     * @param mixed $tussenvoegsel
+     */
+    public function setTussenvoegsel($tussenvoegsel)
+    {
+        $this->tussenvoegsel = $tussenvoegsel;
+    }
+
 
     public function eraseCredentials()
     {
@@ -242,5 +249,15 @@ class User implements UserInterface, \Serializable
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
 }
-//sdfsdf
